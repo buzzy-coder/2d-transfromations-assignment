@@ -261,6 +261,8 @@
                 txVal.innerText = tx;
                 tyVal.innerText = ty;
 
+                p.translate(tx,ty);
+
                 // Draw Transformed Shape
                 p.fill(34, 197, 94, 150); // Green
                 p.stroke(21, 128, 61);
@@ -303,7 +305,9 @@
                 p.strokeWeight(2);
                 p.beginShape();
                 baseShape.forEach(pt => {
-                    p.vertex(pt.x, pt.y);
+                    let x = pt.x * cosT - pt.y * sinT;
+                    let y = pt.x * sinT + pt.y * cosT;
+                    p.vertex(x, y);
                 });
                 p.endShape(p.CLOSE);
             };
@@ -340,7 +344,7 @@
                 p.strokeWeight(2);
                 p.beginShape();
                 baseShape.forEach(pt => {
-                    p.vertex(pt.x, pt.y);
+                    p.vertex(pt.x * sx , pt.y * sy);
                 });
                 p.endShape(p.CLOSE);
             };
@@ -378,7 +382,9 @@
                 p.beginShape();
                 baseShape.forEach(pt => {
                     // Math: x' = x + y*shx, y' = y + x*shy
-                    p.vertex(pt.x, pt.y);
+                    let x = pt.x + pt.y * shx;
+                    let y = pt.y + pt.x * shy;
+                    p.vertex(x, y);
                 });
                 p.endShape(p.CLOSE);
             };
@@ -411,7 +417,9 @@
                 p.strokeWeight(2);
                 p.beginShape();
                 baseShape.forEach(pt => {
-                    p.vertex(pt.x, pt.y);
+                    let x = refY ? -pt.x : pt.x;
+                    let y = refX ? -pt.y : pt.y;
+                    p.vertex(x, y);
                 });
                 p.endShape(p.CLOSE);
             };
